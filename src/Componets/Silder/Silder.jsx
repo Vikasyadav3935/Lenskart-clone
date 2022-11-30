@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import Banner from "./Banner";
+
 
 import './Silder.css'
 function Silder() {
@@ -15,7 +15,8 @@ function Silder() {
   ];
  
   let ind = arr.length - 1;
-  useEffect(() => {
+
+
    setInterval(() => {
      
 
@@ -26,12 +27,9 @@ setIdx(0)
       else{
 
       setIdx(idx + 1)};
-    }, 15000);
+    }, 8000);
   
-    return () => {
-      clearInterval();
-    };
-  },[idx, ind]);
+ 
 
 
 
