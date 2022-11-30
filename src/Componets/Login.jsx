@@ -14,6 +14,7 @@ import {
   Input,
   HStack,
   Icon,
+  Flex,
 } from "@chakra-ui/react";
 import { Checkbox, } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
@@ -23,6 +24,7 @@ import {IoLogoWhatsapp} from "react-icons/io";
 const Login = () => {
   const [user, setUser] = useState("@");
   const [btn, setbtn] = useState();
+  const [pass,setpass]=useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handlechange = (e) => {
@@ -42,6 +44,20 @@ const Login = () => {
    setbtn(buton);
   
   };
+
+    const handlesign=()=>{
+
+
+
+     
+
+      setpass(true)
+     
+
+    }
+    
+
+
   return (
     <div>
       <Button onClick={onOpen}>Sign In</Button>
@@ -50,7 +66,7 @@ const Login = () => {
         <ModalOverlay />
         <ModalHeader></ModalHeader>
         <ModalContent w={"420px"}>
-          <ModalCloseButton borderRadius={"50%"}  bg="white"/>
+          <ModalCloseButton borderRadius={"50%"}  bg="white" m={"10px 10px 0px 0px"} />
           <ModalBody p={"0px 0px "} borderRadius={"15px 15px 15px 15px "}>
             <Image
               src="https://static1.lenskart.com/media/desktop/img/DesignStudioIcons/DesktopLoginImage.svg"
@@ -69,26 +85,54 @@ const Login = () => {
                 Sign In
               </Heading>
 
-              <Input
+
+             {pass===false? <Input
                 placeholder="Mobile/Email"
                 h={"50px"}
                 focusBorderColor="rgb(206, 206, 223)"
                 borderColor={"rgb(206, 206, 223)"}
                 onChange={handlechange}
-              />
+                
+              />:
+              <Box>
+      <Box fontSize={"15px"} color="#66668e">
+        Enter password for
+      </Box>
+      <Flex justifyContent={"space-between"} fontFamily={" sans-serif"} mb="22px" color={"#000042"} >
+        <Box fontSize="18px">{user}</Box>
+        <Box fontSize={"14px"} textDecoration="underline" onClick={()=>setpass(false)} cursor="pointer"> Edit</Box>
+
+      </Flex>
+      <Input
+              placeholder="Enter password"
+              h={"50px"}
+              focusBorderColor="rgb(206, 206, 223)"
+              borderColor={"rgb(206, 206, 223)"}
+              onChange={handlechange}
+              
+            />
+        <Box textDecoration={"underline"} m="15px 0px 0px 0px" color="#000042">
+          Forget Password
+        </Box>
+
+    </Box>
+            }
               {user.includes("@gmail.") ? (
                 ""
               ) : (
                btn
               )}
 
-              <Box fontSize={"12px"}>
+              <HStack fontSize={"12px"}>
                 <Checkbox mb={"20px"} mt="20px" size="sm">
                   Get Update on whatsapp
                 </Checkbox>
-              </Box>
+                <Image src="https://static.lenskart.com/media/desktop/img/25-July-19/whatsapp.png" w={"22px"} h="22px"/>
+
+              </HStack>
               {user.includes("@gmail.") ? (
                 <Button
+                onClick={handlesign}
                   bgColor={"#11daac"}
                   width="100%"
                   borderRadius={"35px/35px"}

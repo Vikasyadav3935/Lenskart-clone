@@ -7,7 +7,7 @@ import {
   InputGroup,
   InputLeftElement,
   ModalHeader,
-  useDisclosure,
+  useDisclosure,Image
 } from "@chakra-ui/react";
 import {
   Modal,
@@ -185,6 +185,7 @@ const Signup = () => {
                 m={"8px 0px 8px 0px"}
               />
               {userData.password.length >= 6 ? "" : pass}
+              <HStack>
               <Box
                 textDecoration={"underline"}
                 fontFamily={" sans-serif"}
@@ -193,7 +194,12 @@ const Signup = () => {
               >
                 Got a Referral code?
               </Box>
-
+              <Box 
+              fontFamily={" sans-serif"}
+              color={"#333368"}
+              >(Optional)</Box>
+              </HStack>
+              <HStack>
               <Checkbox
                 mb={"20px"}
                 mt="20px"
@@ -202,7 +208,8 @@ const Signup = () => {
               >
                 Get Update on whatsapp
               </Checkbox>
-
+              <Image src="https://static.lenskart.com/media/desktop/img/25-July-19/whatsapp.png" w={"22px"} h="22px"/>
+              </HStack>
               <HStack spacing={"3px"} mb="10px">
                 <Box
                   fontSize={"14px"}
