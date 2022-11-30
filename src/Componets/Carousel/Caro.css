@@ -45,8 +45,45 @@ body {
   height: 100%;
   object-fit: cover;
 }
-.text-dir{
+/* .text-dir{
 
     display: flex;
     flex-direction: row;
+} */
+
+.pro-name{
+
+  font-family: 'Futura-Medium';
+  font-size: 18px;
+  font-weight: 600;
+  margin: 15px 0;
+}
+
+
+.Car-div{
+  padding-top: 30px;;
+}
+.exp{
+  background-color:#56b7c3;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+  margin-top: 10px;
+  color: white;
+  font-weight: 600;
+}
+.exp:hover{
+
+
+  background: #56c3bf;
+}
+
+.swiper-button-prev ,.swiper-button-next{
+  color:grey!important;
+padding: 10px;
+}
+#bnr{
+margin-top: 30px;;
+padding-top: 10px;;
+
 }

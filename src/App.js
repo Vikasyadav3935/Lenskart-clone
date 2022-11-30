@@ -4,13 +4,18 @@ import Silder from "./Componets/Silder/Silder";
 import AllRoutes from "./Pages/AllRoutes";
 import "swiper/css/bundle";
 import './Componets/Carousel/Caro.css'
+import Pro from './Componets/Carousel/Data/Glasses.json'
+import Bannerimg from "./Componets/Banner/Banner";
 
 function App() {
+
+  
   return (
     <div className="App">
      <Silder/>  
      <Banner/>
-     <Carousel/>
+     <Carousel value={Pro}/>
+     <Bannerimg/>
     </div>
   );
 }

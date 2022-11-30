@@ -12,125 +12,44 @@ import "./Caro.css";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 
-export default function Carousel() {
+export default function Carousel(props) {
+
+console.log(props.value)
+
+  
   return (
     <>
       <Swiper
-        slidesPerView={7}
-        spaceBetween={30}
+        slidesPerView={4}
+        spaceBetween={40}
         slidesPerGroup={1}
         loop={true}
         loopFillGroupWithBlank={true}
-        pagination={{
-          clickable: true,
-        }}
+        // pagination={{
+        //   clickable: true,
+        // }}
         navigation={true}
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide>
-        <div>
-            <img
-              src="https://static1.lenskart.com/media/desktop/img/Sep21/cateeye.jpg"
-              alt="pic"
-            />
-            <h3>Round</h3>
+       
+  {props.value.map((ele,id)=>{return(
+ <SwiperSlide key={id}>
+ <div className="Car-div">
+     <img
+       src={ele.img}
+       alt="pic"
+     />
+     <h3 className="pro-name">{ele.name}</h3>
 
-            <div className="exp">
-                Expore
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>
-            <img
-              src="https://static1.lenskart.com/media/desktop/img/Sep21/cateeye.jpg"
-              alt="pic"
-            />
-            <h3>chck</h3>
+     <div className="exp">
+         Expore
+     </div>
+   </div>
+ </SwiperSlide>
 
-            <div className="exp">
-                Expore
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide><div>
-            <img
-              src="https://static1.lenskart.com/media/desktop/img/Sep21/cateeye.jpg"
-              alt="pic"
-            />
-            <h3>chck</h3>
-
-            <div className="exp">
-                Expore
-            </div>
-          </div></SwiperSlide>
-        <SwiperSlide><div>
-            <img
-              src="https://static1.lenskart.com/media/desktop/img/Sep21/cateeye.jpg"
-              alt="pic"
-            />
-            <h3>chck</h3>
-
-            <div className="exp">
-                Expore
-            </div>
-          </div></SwiperSlide>
-        <SwiperSlide><div>
-            <img
-              src="https://static1.lenskart.com/media/desktop/img/Sep21/cateeye.jpg"
-              alt="pic"
-            />
-            <h3>chck</h3>
-
-            <div className="exp">
-                Expore
-            </div>
-          </div></SwiperSlide>
-        <SwiperSlide><div>
-            <img
-              src="https://static1.lenskart.com/media/desktop/img/Sep21/cateeye.jpg"
-              alt="pic"
-            />
-            <h3>chck</h3>
-
-            <div className="exp">
-                Expore
-            </div>
-          </div></SwiperSlide>
-        <SwiperSlide><div>
-            <img
-              src="https://static1.lenskart.com/media/desktop/img/Sep21/cateeye.jpg"
-              alt="pic"
-            />
-            <h3>chck</h3>
-
-            <div className="exp">
-                Expore
-            </div>
-          </div></SwiperSlide>
-        <SwiperSlide><div>
-            <img
-              src="https://static1.lenskart.com/media/desktop/img/Sep21/cateeye.jpg"
-              alt="pic"
-            />
-            <h3>chck</h3>
-
-            <div className="exp">
-                Expore
-            </div>
-          </div></SwiperSlide>
-        <SwiperSlide><div>
-            <img
-              src="https://static1.lenskart.com/media/desktop/img/Sep21/cateeye.jpg"
-              alt="pic"
-            />
-            <h3>chck</h3>
-
-            <div className="exp">
-                Expore
-            </div>
-          </div></SwiperSlide>
+  )})}
+        
       </Swiper>
     </>
   );
