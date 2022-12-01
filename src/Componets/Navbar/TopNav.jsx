@@ -39,7 +39,7 @@ const TopNav = () => {
                         <Image h="35px" mt="13px" ml="70px" bg="" src="https://static.lenskart.com/media/mobile/images/phone_number.svg" alt="ph-no"></Image>
                     </Box>
                     <Box ml="25px" mt="12px">
-                        <Box border="1px" h="35px"  w="650px" borderRadius="5px" borderColor="#000042" bg="#FFFFFF">
+                        <Box border="1px" h="35px"  w="400px" borderRadius="5px" borderColor="#000042" bg="#FFFFFF">
                             <Text color="grey" ml="10px">What are you looking for</Text>
                         </Box>
                     </Box>
