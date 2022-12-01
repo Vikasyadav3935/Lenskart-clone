@@ -1,9 +1,11 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import CartPage from './CartPage'
 import HomePage from './HomePage'
 import Account from '../Componets/Account'
 import MyOrders from './MyOrders'
 import { Box } from '@chakra-ui/react'
+
 
 const AllRoutes = () => {
   return (
@@ -13,6 +15,7 @@ const AllRoutes = () => {
           <Route path='account' element={<Account/>}/>
           <Route path='notification' element={<Box fontSize={"40px"}>Manage Notification</Box>}/>
         </Route>
+        <Route path='/cart' element={<CartPage/>}/>
     </Routes>
   )
 }
