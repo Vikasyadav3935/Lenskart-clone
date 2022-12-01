@@ -9,8 +9,8 @@ function App() {
   return (
     <div className="App">
       <AllRoutes/>
-      <Login/>
-      <Signup/>
+      {/* <Login/>
+      <Signup/> */}
       {/* <MyOrders/>
       <Account/> */}
 

@@ -1,6 +1,4 @@
 import React from "react";
-import { useState, useEffect } from 'react'
-import { Link } from "react-router-dom";
 import { Box, Divider, Flex, Image, Text, Spacer } from "@chakra-ui/react";
 
 
@@ -46,7 +44,7 @@ export default function CartItem(props){
             return (
 
 
-              <Box display="flex" gap={6} alignItems="center" bg="#fff" boxShadow='base' p='6' rounded='md' key={index.toString()}>
+              <Box display="flex" gap={6} alignItems="center" bg="#fff" borderRadius='12px'  p='6' boxShadow='0 1px 4px rgb(0 0 0 / 10%)' key={index.toString()}>
                 {/* item-product-card-image */}
                 <Box w="30%">
                   <a href="/" rel="noopener noreferrer">
@@ -61,7 +59,10 @@ export default function CartItem(props){
                     <Box w="60%">
                       <a href="/" rel="noopener noreferrer">
                         <Box>
-                          <Text fontWeight='700' fontFamily='lenskartsans-bold' fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
+                          <Text fontWeight='700' 
+                          // fontFamily='lenskartsans-bold' 
+                          fontFamily='sans-serif-bold' 
+                          fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
                             {el.title}
                           </Text>
                         </Box>
@@ -70,10 +71,16 @@ export default function CartItem(props){
 
                     <Box w="40%">
                       <Text display="flex" gap={6}>
-                        <Text color='#9999b3' fontWeight='400' fontFamily='lenskartsans-bold'>
+                        <Text color='#9999b3' fontWeight='400' 
+                        // fontFamily='lenskartsans-bold' 
+                        fontFamily='sans-serif-bold'
+                        >
                           <s>{'₹' + el.op}</s>
                         </Text>
-                        <Text color='#000042' fontWeight='700' fontFamily='lenskartsans-bold'>{'₹' + el.actual}</Text>
+                        <Text color='#000042' fontWeight='700' 
+                        // fontFamily='lenskartsans-bold' 
+                        fontFamily='sans-serif-bold'
+                        >{'₹' + el.actual}</Text>
                       </Text>
                     </Box>
                   </Box>
@@ -83,11 +90,18 @@ export default function CartItem(props){
                   <Box display='flex' flexDirection='row'>
 
                     <Text
-                      mr='16px' textDecoration='underline' fontWeight='700' fontFamily='lenskartsans-bold' fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
+                      mr='16px' textDecoration='underline' fontWeight='700' 
+                      // fontFamily='lenskartsans-bold' 
+                      fontFamily='sans-serif-bold' 
+                      
+                      fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
                       Remove
                     </Text>
                     <Text
-                      ml='16px' textDecoration='underline' fontWeight='700' fontFamily='lenskartsans-bold' fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
+                      ml='16px' textDecoration='underline' fontWeight='700'
+                      //  fontFamily='lenskartsans-bold' 
+                      fontFamily='sans-serif-bold' 
+                       fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
                       Duplicate
                     </Text>
                   </Box>
