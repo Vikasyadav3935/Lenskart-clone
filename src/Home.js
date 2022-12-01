@@ -1,12 +1,13 @@
 import Carousel from "./Componets/Carousel/Carousel";
 import Banner from "./Componets/Silder/Banner";
 import Silder from "./Componets/Silder/Silder";
-import AllRoutes from "./Pages/AllRoutes";
+
 import "swiper/css/bundle";
 import './Componets/Carousel/Caro.css'
 import Pro from './Componets/Carousel/Data/Glasses.json'
 import Bannerimg from "./Componets/Banner/Banner";
 import Text from "./Componets/Text/Text";
+import Grid from "./Componets/Grid";
 
 
 function Home() {
@@ -27,6 +28,18 @@ function Home() {
      <Bannerimg img="https://static1.lenskart.com/media/desktop/img/Oct22/nyfw/web%20banner.gif"/>
      <Text text="OUR BRANDS"/>
      <Bannerimg img="https://static1.lenskart.com/media/desktop/img/Aug21/Desktop/VC-Banner.jpg"/>
+     <Carousel value={Pro}/>
+     <Carousel value={Pro}/>
+
+<Grid/>
+
+
+     {/* blog */}
+
+     <Bannerimg img="https://static1.lenskart.com/media/desktop/img/Aug21/25-Aug/whatsapp.png"/>
+     <Text text="OUR BLOG"/>
+     <Bannerimg img="https://static1.lenskart.com/media/desktop/img/Nov21/20211224_d_newyears2022_spectacular_below_gridR.jpg" />
+
     </div>
   );
 }

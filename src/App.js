@@ -1,6 +1,6 @@
 import React from 'react'
 import Home from './Home'
-
+import AllRoutes from "./Pages/AllRoutes";
 
 
 

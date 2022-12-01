@@ -28,3 +28,12 @@ background-color: white
 
 
 
+#parent-grid{
+display: flex;
+padding: 10px;;
+padding-top: 20px;
+gap:10px;
+}
+#parent-grid >div div:last-child{
+    margin-top: 17px;;
+}
