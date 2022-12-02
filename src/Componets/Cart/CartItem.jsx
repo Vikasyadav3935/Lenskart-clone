@@ -36,7 +36,49 @@ export default function CartItem(props){
     //   useEffect(() => {
     //     setItem(arr);
     //   }, [])
-    
+
+    // colors
+// : 
+// "Black,Green"
+// dimension
+// : 
+// "62-14-138"
+// gender
+// : 
+// "Men,Women"
+// imageTsrc
+// : 
+// "https://cdn.eyemyeye.com/shared/images/products/S15C4733/S15C4733-1.jpg"
+// mPrice
+// : 
+// "₹ 2,199"
+// name
+// : 
+// "ALF"
+// price
+// : 
+// "₹ 925"
+// productId
+// : 
+// "S75B2001"
+// productRefLink
+// : 
+// "blacktintedaviatorsunglasses"
+// productType
+// : 
+// "sunglasses"
+// rating
+// : 
+// "3"
+// shape
+// : 
+// "Aviator"
+// style
+// : 
+// "FullFrame"
+// userRated
+// : 
+// "68"
       console.log(props.item)
     return(
         <>
@@ -48,7 +90,7 @@ export default function CartItem(props){
                 {/* item-product-card-image */}
                 <Box w="30%">
                   <a href="/" rel="noopener noreferrer">
-                    <Image w='236px' src={el.image} />
+                    <Image w='236px' src={el.imageTsrc} />
                   </a>
                 </Box>
 
@@ -60,10 +102,11 @@ export default function CartItem(props){
                       <a href="/" rel="noopener noreferrer">
                         <Box>
                           <Text fontWeight='700' 
-                          // fontFamily='lenskartsans-bold' 
-                          fontFamily='sans-serif-bold' 
+                          
                           fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
-                            {el.title}
+                            {/* static data */}
+                            {/* {el.title} */}
+                            {el.colors+' Block Phone & Computer Glasses: Classic chase '+ el.colors +' Transparent '+el.style+' '+ el.shape + ' Lenskart Blu LB '+el.productId}
                           </Text>
                         </Box>
                       </a>
@@ -71,16 +114,11 @@ export default function CartItem(props){
 
                     <Box w="40%">
                       <Text display="flex" gap={6}>
-                        <Text color='#9999b3' fontWeight='400' 
-                        // fontFamily='lenskartsans-bold' 
-                        fontFamily='sans-serif-bold'
-                        >
-                          <s>{'₹' + el.op}</s>
+                        <Text color='#9999b3' fontWeight='500'>
+                          <s>{'₹' + el.mPrice}</s>
                         </Text>
                         <Text color='#000042' fontWeight='700' 
-                        // fontFamily='lenskartsans-bold' 
-                        fontFamily='sans-serif-bold'
-                        >{'₹' + el.actual}</Text>
+                        >{'₹' + el.price}</Text>
                       </Text>
                     </Box>
                   </Box>
@@ -91,16 +129,14 @@ export default function CartItem(props){
 
                     <Text
                       mr='16px' textDecoration='underline' fontWeight='700' 
-                      // fontFamily='lenskartsans-bold' 
-                      fontFamily='sans-serif-bold' 
+                      
                       
                       fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
                       Remove
                     </Text>
                     <Text
                       ml='16px' textDecoration='underline' fontWeight='700'
-                      //  fontFamily='lenskartsans-bold' 
-                      fontFamily='sans-serif-bold' 
+                      
                        fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
                       Duplicate
                     </Text>
