@@ -28,7 +28,6 @@ export default function CartNavbar(){
               lineHeight="24px"
               letterSpacing="-.02em"
               color="#66668e"
-              fontFamily="lenskartsans-medium"
               fontWeight="400"
               ml="20px" >
               <Text>100% safe and secure</Text>
