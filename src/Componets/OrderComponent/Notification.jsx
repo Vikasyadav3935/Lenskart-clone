@@ -3,15 +3,17 @@ import React from 'react'
 
 const Notification = () => {
   return (
-    <Box margin={"15px 10px 10px 15px "}>
+    <Box  margin={"15px 10px 10px 15px "}>
         <Box  fontWeight={"400"} fontSize="30px" letterSpacing="-.3px">Manage Notification</Box>
-        <VStack>
-            <Flex border={"1px"}>
+        <VStack >
+            <Flex border={"1px"}  >
                 <Flex>
                     <Image src=''/>
                 </Flex>
-                <Flex>Whatsapp Notification</Flex>
+                <Flex justify={"space-between"}><Box>Whatsapp Notification</Box>
                 <Switch/>
+                </Flex>
+               
             </Flex>
             <Flex border={"1px"}>
                 <Flex>
