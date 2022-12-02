@@ -1,5 +1,6 @@
 import React from "react";
 // import "./Login&sign.css";
+import { useContext } from "react";
 import {
   Center,
   Heading,
@@ -22,6 +23,9 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Required from "./Required";
+import { useEffect } from "react";
+import { AuthContext } from "../ContextApi/AuthContext";
+import Login from "./Login";
 
 const Signup = () => {
   const init = {
@@ -37,12 +41,18 @@ const Signup = () => {
   const [ph, setPh] = useState();
   const [mail, setMail] = useState();
   const [pass, setPass] = useState();
+  const [loading,setLoading]=useState(false);
+  // const [register,setRegister]=useState(false);
+  const { isAuth,setisAuth ,register,setRegister }=useContext(AuthContext);
+  const [ready,setready]=useState();
+  const [exist,setExist]=useState(false)
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     setUserData({ ...userData, [name]: value });
+    
 
     switch (name) {
       case "first_name":
@@ -89,26 +99,57 @@ const Signup = () => {
    
   };
 
+  useEffect(()=>{
+    fetch(`https://lenskart-clone.herokuapp.com/Users`)
+    .then((res)=>res.json())
+    .then((res)=>setready(res))
+    .catch((err)=>console.log(err))
+
+  },[])
+  const Already=()=>{
+    setready(ready.filter((el)=>el.email===userData.email));
+    if(ready.length>0){
+      setExist(true);
+    }
+  }
+
   const getData=(body)=>{
+    setLoading(true)
+
     fetch(`https://lenskart-clone.herokuapp.com/Users`,{
       method:"POST",
       body:JSON.stringify(body),
       headers:{
         'Content-Type':'application/json'
       }
-    })
+    }).then((res)=>res.json())
+    .then((res)=>console.log(res))
+    .catch((err)=>console.log(err))
+    .finally(()=>setLoading(false))
+    .finally(()=>onClose())
+   
   }
 
   const handleRegister=()=>{
+    
+   if(!exist)
     getData(userData);
-
-
   }
 
-  console.log(userData);
+
+  // console.log(userData);
+   useEffect(()=>{
+    
+   },[]);
+   
+
+  // if(register){
+  //   <Login/>
+  // }
+
   return (
     <div>
-      <Button onClick={onOpen}>Sign Up</Button>
+      <Center onClick={onOpen} fontWeight={"400"} fontSize="13px" mt="15px">Sign Up</Center>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
@@ -210,6 +251,7 @@ const Signup = () => {
               </Checkbox>
               <Image src="https://static.lenskart.com/media/desktop/img/25-July-19/whatsapp.png" w={"22px"} h="22px"/>
               </HStack>
+              {exist===true?<Required info="EmailId already exists"/>:""}
               <HStack spacing={"3px"} mb="10px">
                 <Box
                   fontSize={"14px"}
@@ -228,6 +270,7 @@ const Signup = () => {
               userData.password.length >= 6 &&
               userData.ph_no.length == 10 ? (
                 <Button
+                isLoading={loading}
                 onClick={handleRegister}
                   bgColor={"#11daac"}
                   width="100%"

@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../ContextApi/AuthContext";
 import {
   Modal,
   ModalOverlay,
@@ -20,19 +22,26 @@ import {
 import { Checkbox } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
+import { useEffect } from "react";
 
 
 const Login = (props) => {
-  const [user, setUser] = useState("@");
+  const [loading,setLoading]=useState(false);
   const [btn, setbtn] = useState();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [pass, setpass] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {isAuth,setisAuth,register,setRegister}=useContext(AuthContext);
+  const [resdata,setResdata]=useState();
+
 
   const handlechange = (e) => {
-    setUser(e.target.value);
-    console.log(user.includes("@gmail."));
-    setLoginData({...loginData,email:user})
+    const {name ,value}=e.target
+    // setUser(e.target.value);
+    // console.log(loginData.email.includes("@gmail."));
+    // setLoginData({...loginData,email:loginData.email})
+    setLoginData({...loginData,[name]:value})
+
     const buton = (
       <Box
         fontSize={"12px"}
@@ -46,18 +55,29 @@ const Login = (props) => {
     );
     setbtn(buton);
   };
-  const getData=(body)=>{
-    fetch(`https://lenskart-clone.herokuapp.com/Users`,{
-      method:"POST",
-      body:JSON.stringify(body),
-      headers:{
-        'Content-Type':'application/json'
-      }
-    })
+  const getData=()=>{
+     setLoading(true);
+    fetch(`https://lenskart-clone.herokuapp.com/Users`)
     .then((res)=>res.json())
-    .then((res)=>console.log(res))
+    .then((res)=> setResdata(res.filter((el)=>el.email===loginData.email))
+      // console.log(res)
+      // setisAuth(true)
+  //  setResdata( {
+  //     res.filter((el)=>{
+  //        return el.email===loginData.email
+  //     })
+  //   })
+    )
     .catch((err)=>console.log(err))
+    .finally(()=>setLoading(false))
+    .finally(()=>onClose())
+    .finally(()=>setRegister(resdata));
+
+    
   }
+ 
+
+  
 
   const handlesign = () => {
     setpass(true);
@@ -69,12 +89,26 @@ const Login = (props) => {
   const HandleLogin=(e)=>{
     const val=e.target.value
    setLoginData({...loginData,password:val})
+  
 
   }
-   console.log(props.onClick)
+  console.log(loginData)
+  // if(register){
+  //   onOpen();
+  // }
+
+   console.log("res",resdata);
+  // if(isAuth){
+  //   onClose();
+  // }
+  // useEffect(()=>{
+  //   onOpen();
+  // },[])
+
+
   return (
     <div>
-      <Button onClick={onOpen}>Sign In</Button>
+      <Center onClick={onOpen} fontWeight={"400"} fontSize="13px" mt="15px">Sign In</Center>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
@@ -105,6 +139,7 @@ const Login = (props) => {
 
               {pass === false ? (
                 <Input
+                name="email"
                   placeholder="Mobile/Email"
                   h={"50px"}
                   focusBorderColor="rgb(206, 206, 223)"
@@ -122,7 +157,7 @@ const Login = (props) => {
                     mb="22px"
                     color={"#000042"}
                   >
-                    <Box fontSize="18px">{user}</Box>
+                    <Box fontSize="18px">{loginData.email}</Box>
                     <Box
                       fontSize={"14px"}
                       textDecoration="underline"
@@ -134,11 +169,12 @@ const Login = (props) => {
                     </Box>
                   </Flex>
                   <Input
+                  name="password"
                     placeholder="Enter password"
                     h={"50px"}
                     focusBorderColor="rgb(206, 206, 223)"
                     borderColor={"rgb(206, 206, 223)"}
-                    onChange={HandleLogin}
+                    onChange={handlechange}
                   />
                   <Box
                     textDecoration={"underline"}
@@ -149,7 +185,7 @@ const Login = (props) => {
                   </Box>
                 </Box>
               )}
-              {user.includes("@gmail.") ? "" : btn}
+              {loginData.email.includes("@gmail.") ? "" : btn}
 
               <HStack fontSize={"12px"}>
                 <Checkbox mb={"20px"} mt="20px" size="sm">
@@ -161,8 +197,9 @@ const Login = (props) => {
                   h="22px"
                 />
               </HStack>
-              {user.includes("@gmail.") ? (
+              {loginData.email.includes("@gmail.") ? (
                 <Button
+                isLoading={loading}
                   onClick={handlesign}
                   bgColor={"#11daac"}
                   width="100%"
