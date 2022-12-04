@@ -4,14 +4,14 @@ import { Box, Divider, Flex, Image, Text, Spacer, Button } from "@chakra-ui/reac
 const WishlistTemplate = () => {
     const [wishlist, setWishlist] = React.useState([]);
 
-    const cartdata = async () => {
-        const res = await fetch('https://lenskart-clone.herokuapp.com/whishlist')
-        const data = await res.json();
-        // console.log(data)
-        setWishlist(data);
+    const wishlistdata = () => {
+        fetch('http://localhost:3001/whishlist')
+        .then(res=>res.json())
+        .then(data =>setWishlist(data));
     }
+
     React.useEffect(() => {
-        cartdata()
+        wishlistdata()
 
     }, [])
 
