@@ -1,0 +1,12 @@
+{
+  "Users": [
+    {
+      "first_name": "vikas",
+      "last_name": "yadav",
+      "ph_no": "6387712911",
+      "email": "vikas@gmail.com",
+      "password": "vikas123",
+      "id": 1
+    }
+  ]
+}

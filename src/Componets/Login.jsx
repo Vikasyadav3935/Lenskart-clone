@@ -23,6 +23,7 @@ import { Checkbox } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
 import { useEffect } from "react";
+import Required from "./Required";
 
 
 const Login = (props) => {
@@ -31,10 +32,11 @@ const Login = (props) => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [pass, setpass] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {isAuth,setisAuth,register,setRegister}=useContext(AuthContext);
-  const [resdata,setResdata]=useState();
+  const {isAuth,setisAuth,Authdata,setAuthData}=useContext(AuthContext);
+  const [resdata,setResdata]=useState([]);
+  const [incorrect,setinCorrect]=useState(false);
 
-
+ console.log("...............................................................")
   const handlechange = (e) => {
     const {name ,value}=e.target
     // setUser(e.target.value);
@@ -55,23 +57,36 @@ const Login = (props) => {
     );
     setbtn(buton);
   };
+  let res1=[];
   const getData=()=>{
      setLoading(true);
-    fetch(`https://lenskart-clone.herokuapp.com/Users`)
+    fetch(`http://localhost:3004/Users`)
     .then((res)=>res.json())
-    .then((res)=> setResdata(res.filter((el)=>el.email===loginData.email))
-      // console.log(res)
-      // setisAuth(true)
-  //  setResdata( {
-  //     res.filter((el)=>{
-  //        return el.email===loginData.email
-  //     })
-  //   })
-    )
+    .then((res)=> {
+         res1= res.filter((el)=>el.email===loginData.email)
+      if(res1.length===1){
+        setisAuth(true);
+        setAuthData(res1);
+
+
+      }else{
+        setinCorrect(true);
+      }
+
+
+    })
+   
+    
     .catch((err)=>console.log(err))
     .finally(()=>setLoading(false))
-    .finally(()=>onClose())
-    .finally(()=>setRegister(resdata));
+    .finally(()=>{
+      if(isAuth===true){
+        onClose();
+      }
+    
+    })
+ 
+    
 
     
   }
@@ -86,24 +101,29 @@ const Login = (props) => {
     }
    
   };
-  const HandleLogin=(e)=>{
-    const val=e.target.value
-   setLoginData({...loginData,password:val})
-  
 
-  }
   console.log(loginData)
   // if(register){
   //   onOpen();
   // }
 
-   console.log("res",resdata);
-  // if(isAuth){
-  //   onClose();
-  // }
-  // useEffect(()=>{
-  //   onOpen();
-  // },[])
+   console.log("res1",res1);
+
+ 
+
+   console.log(isAuth);
+  
+
+    // if(resdata.length===1){
+    //   // setisAuth(true);
+    //   // setAuthData(resdata)
+    //   console.log(isAuth);
+    //   onClose();
+    //  }
+
+ 
+  
+ 
 
 
   return (
@@ -183,6 +203,7 @@ const Login = (props) => {
                   >
                     Forget Password
                   </Box>
+                  {incorrect===true?<Required info="Wrong email or password"/>:""}
                 </Box>
               )}
               {loginData.email.includes("@gmail.") ? "" : btn}

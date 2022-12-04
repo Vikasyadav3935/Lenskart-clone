@@ -1,5 +1,5 @@
 import AllRoutes from "./Pages/AllRoutes";
-
+import UpNav from "./Componets/UpNav"
 
 
 
@@ -7,7 +7,7 @@ import AllRoutes from "./Pages/AllRoutes";
 function App() {
   return (
     <div className="App">
-      
+      <UpNav/>
       <AllRoutes/>
       
       

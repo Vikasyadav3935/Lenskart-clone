@@ -1,5 +1,4 @@
 import React from "react";
-// import "./Login&sign.css";
 import { useContext } from "react";
 import {
   Center,
@@ -43,10 +42,10 @@ const Signup = () => {
   const [pass, setPass] = useState();
   const [loading,setLoading]=useState(false);
   // const [register,setRegister]=useState(false);
-  const { isAuth,setisAuth ,register,setRegister }=useContext(AuthContext);
-  const [ready,setready]=useState();
+  // const { isAuth,setisAuth ,register,setRegister }=useContext(AuthContext);
+  const [Auth,setAuth]=useState();
   const [exist,setExist]=useState(false)
-
+    var flag=false;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -100,53 +99,61 @@ const Signup = () => {
   };
 
   useEffect(()=>{
-    fetch(`https://lenskart-clone.herokuapp.com/Users`)
-    .then((res)=>res.json())
-    .then((res)=>setready(res))
-    .catch((err)=>console.log(err))
+    
+    
 
   },[])
-  const Already=()=>{
-    setready(ready.filter((el)=>el.email===userData.email));
-    if(ready.length>0){
-      setExist(true);
-    }
-  }
 
   const getData=(body)=>{
     setLoading(true)
-
-    fetch(`https://lenskart-clone.herokuapp.com/Users`,{
+    fetch(`http://localhost:3004/Users`)
+    .then((res)=>res.json())
+    .then((res)=>{
+        res.map((el)=>{
+          if(el.email===body.email){
+           flag=true
+           return el;
+          }
+        })
+    })
+    .then(()=>{
+      if(flag===false){
+        fetch(`http://localhost:3004/Users`,{
       method:"POST",
       body:JSON.stringify(body),
       headers:{
         'Content-Type':'application/json'
       }
     }).then((res)=>res.json())
-    .then((res)=>console.log(res))
-    .catch((err)=>console.log(err))
+    .then((res)=>{
+      setAuth(true);
+      console.log(Auth);
+      
+
+    })
+    .catch((err)=>setAuth(false))
     .finally(()=>setLoading(false))
     .finally(()=>onClose())
-   
+       
+      }
+      else{
+        setLoading(false);
+        setExist(true)
+      }
+    })
+
   }
+
+
 
   const handleRegister=()=>{
-    
-   if(!exist)
-    getData(userData);
+    getData(userData)
+ 
   }
 
 
-  // console.log(userData);
-   useEffect(()=>{
-    
-   },[]);
-   
 
-  // if(register){
-  //   <Login/>
-  // }
-
+ 
   return (
     <div>
       <Center onClick={onOpen} fontWeight={"400"} fontSize="13px" mt="15px">Sign Up</Center>
