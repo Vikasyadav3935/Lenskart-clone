@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 
 import "./Caro.css";
 
-// import required modules
+
 import { Pagination, Navigation } from "swiper";
 
 export default function Carousel(props) {
