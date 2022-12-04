@@ -11,8 +11,8 @@ import { AuthContext } from '../ContextApi/AuthContext';
 
 const UpNav = () => {
  
-const {register}=useContext(AuthContext);
-console.log(register)
+const {isAuth,setisAuth,Authdata,setAuthData}=useContext(AuthContext);
+console.log()
   return (
     <Flex justifyContent={"space-between"}>
         <Flex >
@@ -29,12 +29,12 @@ console.log(register)
         <Flex justifyContent={"space-around"}  w="330px">
             <Center onClick={<Navigate to="/customer"/>} fontWeight={"400"} fontSize="13px" > Track Order</Center>
             <Flex>
-              {/* {register!==false?<Box>{register[0].first_name}</Box>: */}
-              {/* // <Box> */}
+              {isAuth===true?<Center fontWeight={"400"} fontSize="13px" >{Authdata[0].first_name}</Center>:
+              <Box display={"flex"}>
                 <Login/>
                 <Signup/>
-                {/* </Box> */}
-                {/* } */}
+                </Box>
+                }
                 {/* <Link to="/login" fontWeight={"400"} fontSize="13px">Sign In</Link>
                 <Link  fontWeight={"400"} fontSize="13px">Sign Up</Link> */}
             </Flex>

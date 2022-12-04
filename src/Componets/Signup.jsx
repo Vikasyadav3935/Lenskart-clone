@@ -106,7 +106,7 @@ const Signup = () => {
 
   const getData=(body)=>{
     setLoading(true)
-    fetch(`http://localhost:3004/Users`)
+    fetch(`https://easy-pink-bull-shoe.cyclic.app/Users`)
     .then((res)=>res.json())
     .then((res)=>{
         res.map((el)=>{
@@ -118,7 +118,7 @@ const Signup = () => {
     })
     .then(()=>{
       if(flag===false){
-        fetch(`http://localhost:3004/Users`,{
+        fetch(`https://easy-pink-bull-shoe.cyclic.app/Users`,{
       method:"POST",
       body:JSON.stringify(body),
       headers:{

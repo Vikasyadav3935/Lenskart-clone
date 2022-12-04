@@ -43,7 +43,7 @@ const Account = () => {
           Change Password
         </Checkbox>
       </Box>
-      <Button w="218px" h="45px"  mt="20px" backgroundColor={"#e1660f"} >Save & Continue</Button>
+      <Button w="218px" h="45px"  mt="20px" backgroundColor={"#ff9310"} >Save & Continue</Button>
     </Box>
   );
 };

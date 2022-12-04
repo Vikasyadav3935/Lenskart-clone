@@ -4,8 +4,8 @@ import Text from "./OrderComponent/Text";
 
 const Orders = () => {
   return (
-    <Box w="140%">
-      <HStack spacing={"100px"} mt="15px">
+    <Box w="120%">
+      <HStack spacing={"100px"} mt="15px" mb="20px">
         <HStack>
           <Image
             src="https://static.lenskart.com/media/desktop/img/25-July-19/whatsapp.png"

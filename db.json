@@ -7,6 +7,38 @@
       "email": "vikas@gmail.com",
       "password": "vikas123",
       "id": 1
+    },
+    {
+      "first_name": "Rajat",
+      "last_name": "",
+      "ph_no": "7338393939",
+      "email": "rajat@gmail.com",
+      "password": "123456",
+      "id": 2
+    },
+    {
+      "first_name": "vikas",
+      "last_name": "yada",
+      "ph_no": "6678363733",
+      "email": "vikasy@gmail.com",
+      "password": "vikas123",
+      "id": 3
+    },
+    {
+      "first_name": "Amit",
+      "last_name": "kumar",
+      "ph_no": "3635378890",
+      "email": "amit@gmail.com",
+      "password": "1212121",
+      "id": 4
+    },
+    {
+      "first_name": "vinay",
+      "last_name": "khairnar",
+      "ph_no": "7838339383",
+      "email": "vinay@gmail.com",
+      "password": "1212121",
+      "id": 5
     }
   ]
 }

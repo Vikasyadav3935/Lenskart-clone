@@ -36,7 +36,7 @@ const Login = (props) => {
   const [resdata,setResdata]=useState([]);
   const [incorrect,setinCorrect]=useState(false);
 
- console.log("...............................................................")
+ 
   const handlechange = (e) => {
     const {name ,value}=e.target
     // setUser(e.target.value);
@@ -60,7 +60,7 @@ const Login = (props) => {
   let res1=[];
   const getData=()=>{
      setLoading(true);
-    fetch(`http://localhost:3004/Users`)
+    fetch(`https://easy-pink-bull-shoe.cyclic.app/Users`)
     .then((res)=>res.json())
     .then((res)=> {
          res1= res.filter((el)=>el.email===loginData.email)
@@ -107,7 +107,7 @@ const Login = (props) => {
   //   onOpen();
   // }
 
-   console.log("res1",res1);
+   console.log("incorrect",incorrect);
 
  
 
@@ -189,6 +189,7 @@ const Login = (props) => {
                     </Box>
                   </Flex>
                   <Input
+                  type={"password"}
                   name="password"
                     placeholder="Enter password"
                     h={"50px"}
