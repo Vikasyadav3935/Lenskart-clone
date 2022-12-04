@@ -1,88 +1,34 @@
 import React from "react";
-import { Box, Divider, Flex, Image, Text, Spacer } from "@chakra-ui/react";
+import { Box, Divider, Flex, Image, Text, Spacer,Button,useToast } from "@chakra-ui/react";
 
 
 
 export default function CartItem(props){
-
-    // const arr = [
-    //     {
-    //       image: 'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/628x301/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e14246-c1-eyeglasses_vincent-chase-vc-e14246-c1-eyeglasses_G_5134.jpg',
-    //       title: 'brown transparent brown gold full rim square vincent chase blend edit vc e14246-c1 eyeglasses',
-    //       op: 2000,
-    //       actual: 1199
-    //     },
-    //     {
-    //       image: 'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/628x301/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e14246-c1-eyeglasses_vincent-chase-vc-e14246-c1-eyeglasses_G_5134.jpg',
-    //       title: 'brown transparent brown gold full rim square vincent chase blend edit vc e14246-c1 eyeglasses',
-    //       op: 2000,
-    //       actual: 1199
-    //     },
-    //     {
-    //       image: 'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/628x301/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e14246-c1-eyeglasses_vincent-chase-vc-e14246-c1-eyeglasses_G_5134.jpg',
-    //       title: 'brown transparent brown gold full rim square vincent chase blend edit vc e14246-c1 eyeglasses',
-    //       op: 2000,
-    //       actual: 1199
-    //     },
-    //     {
-    //       image: 'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/628x301/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e14246-c1-eyeglasses_vincent-chase-vc-e14246-c1-eyeglasses_G_5134.jpg',
-    //       title: 'brown transparent brown gold full rim square vincent chase blend edit vc e14246-c1 eyeglasses',
-    //       op: 2000,
-    //       actual: 1199
-    //     }
-    //   ]
-    //   const [item, setItem] = useState([]);
-    
-    //   useEffect(() => {
-    //     setItem(arr);
-    //   }, [])
-
-    // colors
-// : 
-// "Black,Green"
-// dimension
-// : 
-// "62-14-138"
-// gender
-// : 
-// "Men,Women"
-// imageTsrc
-// : 
-// "https://cdn.eyemyeye.com/shared/images/products/S15C4733/S15C4733-1.jpg"
-// mPrice
-// : 
-// "₹ 2,199"
-// name
-// : 
-// "ALF"
-// price
-// : 
-// "₹ 925"
-// productId
-// : 
-// "S75B2001"
-// productRefLink
-// : 
-// "blacktintedaviatorsunglasses"
-// productType
-// : 
-// "sunglasses"
-// rating
-// : 
-// "3"
-// shape
-// : 
-// "Aviator"
-// style
-// : 
-// "FullFrame"
-// userRated
-// : 
-// "68"
+  
+  const toast = useToast()
+  const position ='top left'
+  function alert(){
+    toast({
+      title: `Item Removed From Cart!`,
+      position: position,
+      isClosable: true,
+      status: 'error',
+    })
+  }
+//   async function handleDelete(id) {
+//     let g= await fetch(`https://easy-pink-bull-shoe.cyclic.app/Cart/${id}`, {
+//         method: "DELETE",
+//         body: JSON.stringify(props.item),
+//         headers: { 'Content-Type': "application/json" }
+//     })
+//     await g.json()
+//     props.refresh()
+// }
       console.log(props.item)
     return(
         <>
         {props.item.map((el, index) => {
+          console.log(props.item)
             return (
 
 
@@ -131,7 +77,13 @@ export default function CartItem(props){
                       mr='16px' textDecoration='underline' fontWeight='700' 
                       
                       
-                      fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
+                      fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'
+                      onClick={()=>{
+                        alert()
+                        props.refresh(el.id)
+
+                      }}
+                      >
                       Remove
                     </Text>
                     <Text
