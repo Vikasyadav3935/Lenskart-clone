@@ -5,7 +5,7 @@ const WishlistTemplate = () => {
     const [wishlist, setWishlist] = React.useState([]);
 
     const wishlistdata = () => {
-        fetch('http://localhost:3001/whishlist')
+        fetch('https://easy-pink-bull-shoe.cyclic.app/whishlist')
         .then(res=>res.json())
         .then(data =>setWishlist(data));
     }

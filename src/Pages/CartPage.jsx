@@ -1,5 +1,5 @@
 import React from "react";
-import {  AiOutlineArrowLeft } from 'react-icons/ai'
+import {  AiOutlineArrowLeft,AiOutlinePlusCircle } from 'react-icons/ai'
 import { useState, useEffect } from 'react'
 import "../Componets/Cart/CartPage.css";
 import { Link } from "react-router-dom";
@@ -32,9 +32,42 @@ export default function CartPage() {
         body: JSON.stringify(item),
         headers: { 'Content-Type': "application/json" }
     }).then(res=>cartdata())
+ 
+  }
 
+  function handleupdate(id,quantity) 
+  {
+    console.log(quantity)
+    let q=parseInt(quantity)
+    q+=1;
+    fetch(`https://easy-pink-bull-shoe.cyclic.app/Cart/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          "quntity": q
+        }),
+        headers: { 'Content-Type': "application/json" }
+    }).then(res=>cartdata())
+ 
+  }
+
+  function handleupdateminus(id,quantity) 
+  {
+    console.log(quantity)
+    let q=parseInt(quantity)
+    if(q>0)
+    {
+      q-=1;
+    }
     
-}
+    fetch(`https://easy-pink-bull-shoe.cyclic.app/Cart/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          "quntity": q
+        }),
+        headers: { 'Content-Type': "application/json" }
+    }).then(res=>cartdata())
+ 
+  }
 
 
 
@@ -55,7 +88,7 @@ export default function CartPage() {
   let price = 0;
   const total = () => {
     item.map(el => {
-      price += parseInt(el.mPrice);
+      price += parseInt(el.mPrice)*(parseInt(el.quntity)+1);
 
     })
     return price;
@@ -65,7 +98,7 @@ export default function CartPage() {
   let actualPrice = 0;
   const actual = () => {
     item.map(el => {
-      actualPrice += parseInt(el.price);
+      actualPrice += parseInt(el.price)*(parseInt(el.quntity)+1);
     })
     discount = (actualPrice * 60) / 100;
     return actualPrice;
@@ -105,7 +138,7 @@ export default function CartPage() {
               </Box>
               {/* item-product-card-wrapper */}
               {/* yha pe data fetch kr ke map se render krna hai mere ko --> done*/}
-              <CartItem item={item} refresh={handleDelete} />
+              <CartItem item={item} refresh={handleDelete} update={handleupdate} updateminus={handleupdateminus} />
 
               <Box >
                 <Text
@@ -160,7 +193,7 @@ export default function CartPage() {
                 </Box>
               </Box>
 
-              <Box class="gold-membership-wrapper ">
+              <Box class="gold-membership-wrapper " cursor='pointer'>
                 <Box display='flex' flexDirection='column' gap={2} bg='rgb(255, 240, 187)'
                   p='5' border='1px solid #e0c67c' borderRadius='12px' color='#000042' etterSpacing='-.02em'
                   boxShadow='0 1px 4px rgb(0 0 0 / 10%)' ref={btnRef} colorScheme='teal' onClick={onOpen}>
@@ -172,8 +205,13 @@ export default function CartPage() {
                       fontWeight='700'
                       fontSize='14px'
                       lineHeight='20px'
-                      letterSpacing='-.02em'>
-                      12TH ANNIVERSARY SPECIAL
+                      letterSpacing='-.02em'
+                      border='1px solid #ccc'
+                      w='max-content'
+                      p={2}
+                      borderRadius={12}
+                      >
+                      Check Available Cuopon
                     </Text>
                   </Box>
                   <Box>
@@ -309,6 +347,7 @@ export default function CartPage() {
             </Box>
 
           </Box>
+          
         </Box>
         }
       </Box>
