@@ -7,10 +7,12 @@ import SingleProductPage from './SingleProductPage'
 import CartPage from './CartPage'
 import Login from '../Componets/Login'
 import { Privateroutes } from '../ContextApi/Privateroute'
+import Payment from '../Componets/Payment/Payment'
+import CartItem from '../Componets/Payment/CartItem'
 const AllRoutes = () => {
   return (
     <Routes>
-       
+       <Route path='/shiping' element={<Payment/>}/>
        <Route path="/" element={<Home/>}/>
        <Route path='/product' element={<ProductList/>}/>
        <Route path='/product/:id' element={<SingleProductPage/>}/>
