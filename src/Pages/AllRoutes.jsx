@@ -1,21 +1,31 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Home from '../Home'
+import ProductList from '../Componets/ProductComponents/ProductList'
+
+import SingleProductPage from './SingleProductPage'
 import CartPage from './CartPage'
-import HomePage from './HomePage'
-import Account from '../Componets/Account'
-import MyOrders from './MyOrders'
-import { Box } from '@chakra-ui/react'
-
-
+import Login from '../Componets/Login'
+import { Privateroutes } from '../ContextApi/Privateroute'
 const AllRoutes = () => {
   return (
     <Routes>
-        <Route path='/' element={<HomePage/>}/>
-        <Route path='/customer' element={<MyOrders/>}>
-          <Route path='account' element={<Account/>}/>
-          <Route path='notification' element={<Box fontSize={"40px"}>Manage Notification</Box>}/>
-        </Route>
-        <Route path='/cart' element={<CartPage/>}/>
+       
+       <Route path="/" element={<Home/>}/>
+       <Route path='/product' element={<ProductList/>}/>
+       <Route path='/product/:id' element={<SingleProductPage/>}/>
+       <Route path='/cart' element={
+       <Privateroutes>
+
+
+<CartPage/>
+       </Privateroutes>
+       
+       }/>
+
+       <Route path='/Login' element={<Login/>}/>
     </Routes>
   )
 }
