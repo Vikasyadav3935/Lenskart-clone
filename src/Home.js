@@ -12,8 +12,18 @@ import Proflex from "./Componets/Pro-flex/Pro-flex";
 import Dropdown from "./Componets/Pro-flex/Dropdown";
 
 import NavBar from "../src/Componets/Navbar/TopNav"
+
+import Footer from './Componets/Footer/Footer'
+
+import React, { useEffect } from 'react'
 function Home() {
 
+  useEffect(() => {
+   document.title="Lenskart"
+  
+   
+  }, [])
+  
   
   return (
     <div className="App">
@@ -46,6 +56,8 @@ function Home() {
      <Text text="OUR BLOG"/>
      <Bannerimg img="https://static1.lenskart.com/media/desktop/img/Nov21/20211224_d_newyears2022_spectacular_below_gridR.jpg" />
 
+
+<Footer/>
     </div>
   );
 }

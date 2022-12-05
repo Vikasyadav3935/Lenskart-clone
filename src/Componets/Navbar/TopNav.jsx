@@ -5,6 +5,18 @@ import Hover from './Hover'
 import Login from '../Login'
 import Signup from '../Signup'
 import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+ 
+} from '@chakra-ui/react'
+
+import {Navigate} from "react-router-dom"
+import {TriangleDownIcon} from "@chakra-ui/icons";
+
+import {
     Drawer,
     DrawerBody,
     DrawerFooter,
@@ -29,7 +41,9 @@ const TopNav = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const firstField = React.useRef()
   
-const {isAuth,Authdata}=useContext(AuthContext)
+    const {isAuth,setisAuth,Authdata,setAuthdata}=useContext(AuthContext)
+
+
 
     return(
 
@@ -73,14 +87,38 @@ const {isAuth,Authdata}=useContext(AuthContext)
                             <Text color="grey" ml="2%" mt="0.3%">What are you looking for</Text>
                         </Box>
                     </Box>
-                    <Box  fontSize="75%" fontFamily="sans-serif" w="28%" ml="5%">
+                    <Box  fontSize="13px" fontFamily="sans-serif" w="30%" ml="5%">
                         <Box pt="5%" display="flex" justifyContent="space-between">                      
-                            <Text cursor="pointer"> 
+                            <Link to="/customer/orders" cursor="pointer"> 
                                 Track Order
-                            </Text>
+                            </Link>
                             <Box  display="flex">
                             <Flex>
-              {isAuth===true?<Center fontWeight={"400"} fontSize="13px" >{Authdata[0].first_name}</Center>:
+              {isAuth===true?
+              <Popover trigger="hover">
+              <PopoverTrigger>
+                <Box fontWeight={"400"} fontSize="13px" mt="-2px" >{Authdata[0].first_name}<TriangleDownIcon ml="2px" fontSize={"9px"} _hover={{transform: "rotate(180deg)"}}/> </Box>
+              </PopoverTrigger>
+              <PopoverContent w="200px" boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}>
+                
+               
+              
+                <PopoverBody display={"flex"} flexDirection="column" h={"160px"} justifyContent="space-between" >
+                <Link  to="/customer/orders" color="#333368" >My orders</Link>
+                <Link  color="#333368" >My Prescription</Link>
+                <Link color="#333368" >My Store credit</Link>
+                <Link  to="/customer/account" color="#333368" >Account information</Link>
+                <Box color="#333368" onClick={()=>{ 
+                  setisAuth(false)
+                  setAuthdata('')
+                   return <Navigate to="/"/>
+
+                }} >Logout</Box>
+            </PopoverBody>
+              </PopoverContent>
+            </Popover>
+              
+              :
               <Box display={"flex"}>
                 <Login/>
                 <Signup/>
@@ -113,114 +151,68 @@ const {isAuth,Authdata}=useContext(AuthContext)
             </Box>
             </div>
             <div className={Styles.mobView}>
-              <Button leftIcon={<FiMenu />} colorScheme='teal' onClick={onOpen}>
-              </Button>
-              <Drawer isOpen={isOpen} placement='left' initialFocusRef={firstField} onClose={onClose}>
-              <DrawerOverlay/>
-              <DrawerContent w="100%">
-              <DrawerCloseButton />
-              <DrawerHeader borderBottomWidth='1px'>
-              <div className={Styles.div1}>
-                <div className={Styles.div2}>
+                <Button leftIcon={<FiMenu />} colorScheme='teal' onClick={onOpen}></Button>
+                <Drawer isOpen={isOpen} placement='left' initialFocusRef={firstField} onClose={onClose}>
+                <DrawerOverlay />
+                <DrawerContent w="1000px" bg="#27394E">
+                <DrawerCloseButton />
+                <DrawerHeader borderBottomWidth='1px'>
+                <div className={Styles.div1} style={{borderBottom:"2px solid #18CFA8",padding:"5%"}}>
+                  <div className={Styles.div2}>
                     <Avatar src='https://bit.ly/broken-link' /> 
-                      <div className={Styles.div3}>
-                        <h3>Hi Yogi</h3>
-                        <Link color="#CCCCCC" fontSize="70%" fontFamily="" fontWeight="">Login/Sign Up to manage your orders & more!</Link>
+                    <div className={Styles.div3}>
+                        <h3 style={{color:"white",marginTop:"10px"}}>Hi Yogi</h3>
+                        <Link color="#CCCCCC" fontSize="50%" mt="5%">Enjoy Buy 1 Get 1 offer for 365 days</Link>
                     </div>
+                  </div>
+                  <Button bg="#00BAC6" w="100%" h="32px" mt="5%" color="#FFFFFF">GET GOLD MEMBERSHIP</Button>
                 </div>
-                <Button bg="#00BAC6" w="100%" color="#FFFFFF">Login Or Register</Button>
-            </div>
-            <div className="hrLine"></div>
-            <Link>Contact Us</Link>
-            <br />
-            <Heading>HIGHLIGHTS</Heading>
-
-                <Link>Check Frame Size</Link>
-                <Link>Gold Membership</Link>
-                <Link>Try Frames in 3D</Link>
-                <Link>Dowloads Apps</Link>
-
-            <br />
-
-            <Heading>SHOP NOW</Heading>
-            <Accordion allowMultiple>
-
-  <AccordionItem>
-    {({ isExpanded }) => (
-      <>
-        <h2>
-          <AccordionButton>
-            <Box flex='1' textAlign='left'>
-              Section 2 title
-            </Box>
-            {isExpanded ? (
-              <AiOutlineMinus fontSize='12px' />
-            ) : (
-              <AiOutlinePlus fontSize='12px' />
-            )}
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </AccordionPanel>
-      </>
-    )}
-  </AccordionItem>
-</Accordion>
-          </DrawerHeader>
-
-          <DrawerBody >
-            {/* <Stack spacing='24px'>
-              <Box>
-                <FormLabel htmlFor='username'>Name</FormLabel>
-                <Input
-                  ref={firstField}
-                  id='username'
-                  placeholder='Please enter user name'
-                />
-              </Box>
-
-              <Box>
-                <FormLabel htmlFor='url'>Url</FormLabel>
-                <InputGroup>
-                  <InputLeftAddon>http://</InputLeftAddon>
-                  <Input
-                    type='url'
-                    id='url'
-                    placeholder='Please enter domain'
-                  />
-                  <InputRightAddon>.com</InputRightAddon>
-                </InputGroup>
-              </Box>
-
-              <Box>
-                <FormLabel htmlFor='owner'>Select Owner</FormLabel>
-                <Select id='owner' defaultValue='segun'>
-                  <option value='segun'>Segun Adebayo</option>
-                  <option value='kola'>Kola Tioluwani</option>
-                </Select>
-              </Box>
-
-              <Box>
-                <FormLabel htmlFor='desc'>Description</FormLabel>
-                <Textarea id='desc' />
-              </Box>
-            </Stack> */}
-          </DrawerBody>
-
-          {/* <DrawerFooter borderTopWidth='1px'>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Submit</Button>
-          </DrawerFooter> */}
-        </DrawerContent>
+                  <Box display="flex" flexDirection="column">
+                      <Link color="white" mt="10%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">My Orders</Link>
+                      <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Manage Notification</Link>
+                      <Link color="white" mt="6%" borderBottom="3px solid #526171" pb="5%" fontSize="72%">Contact Us</Link>
+                  </Box>
+                  <Heading mt="15%" color="white" fontSize="80%">HIGHLIGHTS</Heading>
+                  <Box display="flex" flexDirection="column">
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Check Frame Size</Link>
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Gold Membership</Link>
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Try Frames in 3D</Link>
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Dowloads Apps</Link>
+                  </Box>
+                  <Heading mt="15%" color="white" fontSize="80%">SHOP NOW</Heading>
+                  <Box  display="flex" flexDirection="column">
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Men</Link>
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Women</Link>
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Kids</Link>
+                  </Box>
+                  <Heading mt="15%" color="white" fontSize="80%">Our Services</Heading>
+                  <Box  display="flex" flexDirection="column">
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Free Home Trail</Link>
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Home Eye check-up</Link>
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Store Locator</Link>
+                  </Box>
+                  <Heading mt="15%" color="white" fontSize="80%">International</Heading>
+                  <Box  display="flex" flexDirection="column">
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Singapore</Link>
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">USA</Link>
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">UAE</Link>
+                  </Box>
+                  <Heading mt="15%" color="white" fontSize="80%">FAQ's & POLICIES</Heading>
+                  <Box  display="flex" flexDirection="column">
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Frequently Asked Questions</Link>
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Cancellation & Return Policy</Link>
+                    <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Cobrowsing</Link>
+                  </Box>
+                  <Box mt="15%">
+                      <Link color="white" mt="6%" borderBottom="1px solid #526171" pb="5%" fontSize="72%">Logout</Link>
+                  </Box>
+                  <Accordion allowMultiple>
+                  </Accordion>
+                </DrawerHeader>
+          </DrawerContent>
       </Drawer>
-
-            </div>
+    
+    </div>
         </div>
     )
 }

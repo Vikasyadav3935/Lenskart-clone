@@ -2,7 +2,7 @@ import React from "react";
 import {  AiOutlineArrowLeft,AiOutlinePlusCircle } from 'react-icons/ai'
 import { useState, useEffect } from 'react'
 import "../Componets/Cart/CartPage.css";
-import { Link } from "react-router-dom";
+import { Link ,Navigate, useNavigate} from "react-router-dom";
 import {
   Box, Divider, Flex, Image, Text, Spacer, Button, Drawer,
   DrawerBody,
@@ -112,6 +112,9 @@ export default function CartPage() {
   const [apply, setApply] = useState(false);
 
   // return main cart page  jsx
+
+
+  const navigate=useNavigate();
   return (
     <>
       <Box w="100%" bg="rgb(251,249,247)">
@@ -340,7 +343,7 @@ export default function CartPage() {
                 lineHeight='24px'
                 letterSpacing='-.02em'
                 textDecoration='none!important'
-                border='none'
+                border='none' onClick={()=>navigate("/shiping")}
                 >
                 Proceed To Checkout
               </Button>

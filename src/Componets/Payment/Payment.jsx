@@ -2,7 +2,11 @@ import React from 'react'
 import CartItem from './CartItem'
 import './Pay.css'
 import CartNavbar from '../Cart/CartNavbar'
+import { useNavigate } from 'react-router-dom'
 function Payment() {
+
+
+  let navigate=useNavigate();
   return (
 
 
@@ -65,7 +69,7 @@ function Payment() {
 
 <br/>
 
-<p id='shiping'>CONTINUE</p>
+<p id='shiping' onClick={()=>navigate('/payment')}>CONTINUE</p>
 
 
 </div>

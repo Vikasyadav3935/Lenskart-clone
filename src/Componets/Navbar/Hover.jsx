@@ -13,6 +13,7 @@ Navigate("/product")
 }
 
   return (  
+    
     <div className='MainMenu'>
       <ul>
         <li onClick={change}>EYEGLASSES   

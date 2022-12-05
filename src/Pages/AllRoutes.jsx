@@ -9,9 +9,11 @@ import Login from '../Componets/Login'
 import { Privateroutes } from '../ContextApi/Privateroute'
 import Payment from '../Componets/Payment/Payment'
 import CartItem from '../Componets/Payment/CartItem'
+import Card from '../Componets/Payment/Card'
 const AllRoutes = () => {
   return (
     <Routes>
+      <Route path='/payment' element={<Card/>}/>
        <Route path='/shiping' element={<Payment/>}/>
        <Route path="/" element={<Home/>}/>
        <Route path='/product' element={<ProductList/>}/>

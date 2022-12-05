@@ -7,6 +7,7 @@
     color: #fff;
     
 font-size: 20px;
+width: 100% !important
 }
 .input{
 outline: 1px solid black;
@@ -57,10 +58,14 @@ margin-left: 22px;
   
 
  color: #fff;
- margin-top: 10px;
+ margin-top: 40px;
     width: 200px;
     margin-left: 70%;
     text-align: center;
     border-radius: 5px;
 
+}
+.card{
+    display: flex;
+    gap:10px
 }

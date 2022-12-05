@@ -17,6 +17,7 @@ import React, { useEffect, useState } from "react";
 import FrameType from "./FrameType";
 import axios from "axios";
 import LodingState from "./LodingState";
+import TopNav from "../Navbar/TopNav";
 
 const ProductList = () => {
   const [products , setProducts]=useState([])
@@ -46,6 +47,7 @@ const ProductList = () => {
  
   return (
     <>
+    <TopNav/>
     <Flex m="0" px="2%">
       <Box w="18%" m={0}>
         <Box my="20px">
