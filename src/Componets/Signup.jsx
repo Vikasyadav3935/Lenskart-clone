@@ -1,5 +1,5 @@
 import React from "react";
-// import "./Login&sign.css";
+import { useContext } from "react";
 import {
   Center,
   Heading,
@@ -22,6 +22,9 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Required from "./Required";
+import { useEffect } from "react";
+import { AuthContext } from "../ContextApi/AuthContext";
+import Login from "./Login";
 
 const Signup = () => {
   const init = {
@@ -37,12 +40,18 @@ const Signup = () => {
   const [ph, setPh] = useState();
   const [mail, setMail] = useState();
   const [pass, setPass] = useState();
-
+  const [loading,setLoading]=useState(false);
+  // const [register,setRegister]=useState(false);
+  // const { isAuth,setisAuth ,register,setRegister }=useContext(AuthContext);
+  const [Auth,setAuth]=useState();
+  const [exist,setExist]=useState(false)
+    var flag=false;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     setUserData({ ...userData, [name]: value });
+    
 
     switch (name) {
       case "first_name":
@@ -89,26 +98,65 @@ const Signup = () => {
    
   };
 
+  useEffect(()=>{
+    
+    
+
+  },[])
+
   const getData=(body)=>{
-    fetch(`https://lenskart-clone.herokuapp.com/Users`,{
+    setLoading(true)
+    fetch(`https://easy-pink-bull-shoe.cyclic.app/Users`)
+    .then((res)=>res.json())
+    .then((res)=>{
+        res.map((el)=>{
+          if(el.email===body.email){
+           flag=true
+           return el;
+          }
+        })
+    })
+    .then(()=>{
+      if(flag===false){
+        fetch(`https://easy-pink-bull-shoe.cyclic.app/Users`,{
       method:"POST",
       body:JSON.stringify(body),
       headers:{
         'Content-Type':'application/json'
       }
+    }).then((res)=>res.json())
+    .then((res)=>{
+      setAuth(true);
+      console.log(Auth);
+      
+
     })
+    .catch((err)=>setAuth(false))
+    .finally(()=>setLoading(false))
+    .finally(()=>onClose())
+       
+      }
+      else{
+        setLoading(false);
+        setExist(true)
+      }
+    })
+
   }
+
+
 
   const handleRegister=()=>{
-    getData(userData);
-
-
+    getData(userData)
+ 
   }
 
-  console.log(userData);
+
+
+ 
   return (
     <div>
-      <Button onClick={onOpen}>Sign Up</Button>
+      <Center onClick={onOpen} fontWeight={"400"} fontSize="13px" >Sign Up</Center>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
@@ -210,6 +258,7 @@ const Signup = () => {
               </Checkbox>
               <Image src="https://static.lenskart.com/media/desktop/img/25-July-19/whatsapp.png" w={"22px"} h="22px"/>
               </HStack>
+              {exist===true?<Required info="EmailId already exists"/>:""}
               <HStack spacing={"3px"} mb="10px">
                 <Box
                   fontSize={"14px"}
@@ -228,6 +277,7 @@ const Signup = () => {
               userData.password.length >= 6 &&
               userData.ph_no.length == 10 ? (
                 <Button
+                isLoading={loading}
                 onClick={handleRegister}
                   bgColor={"#11daac"}
                   width="100%"

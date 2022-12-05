@@ -8,16 +8,22 @@ import Pro from './Componets/Carousel/Data/Glasses.json'
 import Bannerimg from "./Componets/Banner/Banner";
 import Text from "./Componets/Text/Text";
 import Grid from "./Componets/Grid";
+import Proflex from "./Componets/Pro-flex/Pro-flex";
+import Dropdown from "./Componets/Pro-flex/Dropdown";
 
-
+import NavBar from "../src/Componets/Navbar/TopNav"
 function Home() {
 
   
   return (
     <div className="App">
+<NavBar/>
+
      <Silder/>  
+     <Dropdown/>
      <Banner/>
      <Carousel value={Pro}/>
+    
      <Bannerimg img="https://static1.lenskart.com/media/desktop/img/Nov22/19-Nov/party12.jpg"/>
      <Text text="As Seen On Kiara"/>
      <Bannerimg img="https://static1.lenskart.com/media/desktop/img/Nov22/23-Nov/Hompage-banner4.jpg"/>
