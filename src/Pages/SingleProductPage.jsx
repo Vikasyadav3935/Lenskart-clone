@@ -37,7 +37,7 @@ const SingleProductPage = () => {
    <TopNav/>
     <Grid m={5} gap={5} justifyContent="space-around" templateColumns='repeat(3, 1fr)'>
         <GridItem borderRadius={10} p="80px 5px" border="1px solid"  borderColor="gray.300"><Image  src={data.imageTsrc}/></GridItem>
-        <GridItem borderRadius={10} p="80px 5px" border="1px solid"  borderColor="gray.300" ><Image src='https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/1325x636/9df78eab33525d08d6e5fb8d27136e95//l/i/blue-block-phone-&-computer-glasses:-sky-blue-transparent-full-rim-wayfarer-lenskart-blu-lb-e14058-c3_lenskart-blu-lb-e14058-c3-eyeglasses_lenskart-blu-lb-e14058-c3-eyeglasses_eyeglasses_g_708823_02_2022.jpg'/></GridItem>
+        <GridItem borderRadius={10} p="80px 5px" border="1px solid"  borderColor="gray.300" ><Image src={data.imageTsrc}/></GridItem>
         <GridItem position="relative" p={5} colSpan={1} rowSpan={10} >
           <Text color="gray.500">{data.name}</Text>
           <Text my="10px" fontWeight={'bold'} w="80%">Blue Block Phone & Computer Glasses: Sky Blue Transparent Full Rim Wayfarer Lenskart Blu LB E14058-C3</Text>

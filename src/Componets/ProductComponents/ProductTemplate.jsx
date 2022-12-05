@@ -8,8 +8,11 @@ const ProductTemplate = ({src , rating , userRated , price , name ,shape , color
   const [iswhish , setIsWhish]=useState(false)
   const navigate = useNavigate();
   let colors
-  if(color!=false){
+  if(color!=false && color!=undefined){
+    console.log(color)
     colors  = color.split(',');
+  }else{
+    colors=["black"]
   }
   const handleWhishList=()=>{
     if(iswhish){
