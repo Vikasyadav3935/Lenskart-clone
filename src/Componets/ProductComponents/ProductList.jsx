@@ -1,5 +1,7 @@
 import {
   Box,
+  Button,
+  Center,
   Checkbox,
   Flex,
   Grid,
@@ -17,22 +19,22 @@ import axios from "axios";
 import LodingState from "./LodingState";
 
 const ProductList = () => {
-  const dUrl='https://easy-pink-bull-shoe.cyclic.app/Products?_page=1&_limit=9'
   const [products , setProducts]=useState([])
   const [isLoding , setIsLoding]=useState(false)
   const [filters , setfilters]=useState([])
+  const [page , setPage]=useState(1)
   const handleFilter =()=>{
-
+    
   }
+
   let loader=[1,2,3,4,5,6]
-  const[ url , setUrl] =useState(dUrl)
+  
   const addSorttoUrl=(e)=>{
-    let order = e.target.value;
-    setUrl(dUrl+`&_sort=price&_order=${order}`)
+   
   }
   const fetchproduct=()=>{
     setIsLoding(true)
-    axios(url)
+    axios(`https://easy-pink-bull-shoe.cyclic.app/Products?_page=${page}&_limit=9`)
     .then(res=>{setProducts(res.data)
       setIsLoding(false)
   })
@@ -40,9 +42,10 @@ const ProductList = () => {
   }
   useEffect(()=>{
     fetchproduct();
-  },[url])
+  },[page])
  
   return (
+    <>
     <Flex m="0" px="2%">
       <Box w="18%" m={0}>
         <Box my="20px">
@@ -221,6 +224,12 @@ const ProductList = () => {
           }
       </Box>
     </Flex>
+          <Flex mt={5} mb={10} gap={5} justifyContent="Center" ml="17%">
+          <Button disabled={page===1} onClick={()=>(setPage(pre=>pre-1))}>PRE</Button>
+          <Button>{page}</Button>
+          <Button onClick={()=>(setPage(pre=>pre+1))}>NEXT</Button>
+          </Flex>
+   </>
   );
 };
 
