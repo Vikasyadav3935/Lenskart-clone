@@ -11,12 +11,14 @@ import Grid from "./Componets/Grid";
 import Proflex from "./Componets/Pro-flex/Pro-flex";
 import Dropdown from "./Componets/Pro-flex/Dropdown";
 
-
+import NavBar from "../src/Componets/Navbar/TopNav"
 function Home() {
 
   
   return (
     <div className="App">
+<NavBar/>
+
      <Silder/>  
      <Dropdown/>
      <Banner/>

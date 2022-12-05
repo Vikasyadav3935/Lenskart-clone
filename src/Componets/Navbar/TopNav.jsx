@@ -1,7 +1,9 @@
-import React from 'react';
-import {Text,Image,Box, HStack,Link,Avatar, Heading} from '@chakra-ui/react';
+import React, { useContext } from 'react';
+import {Text,Image,Box, HStack,Link,Avatar, Heading, Flex, Center} from '@chakra-ui/react';
 import Styles from './TopNav.module.css'
 import Hover from './Hover'
+import Login from '../Login'
+import Signup from '../Signup'
 import {
     Drawer,
     DrawerBody,
@@ -22,10 +24,13 @@ import {
   } from '@chakra-ui/react'
   import { FiMenu } from "react-icons/fi";
   import { AiOutlinePlus,AiOutlineMinus } from "react-icons/ai";
+import { AuthContext } from '../../ContextApi/AuthContext';
 const TopNav = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const firstField = React.useRef()
   
+const {isAuth,Authdata}=useContext(AuthContext)
+
     return(
 
         <div className={Styles.tn_div_1} style={{width:'100%'}}>
@@ -63,15 +68,9 @@ const TopNav = () => {
                     <Box width="10%" ml="5%" bg="">
                         <Image h="100%" width="100%"  src="https://static.lenskart.com/media/mobile/images/phone_number.svg" alt="ph-no"></Image>
                     </Box>
-
-                    <Box ml="25px" mt="12px">
-                        <Box border="1px" h="35px"  w="400px" borderRadius="5px" borderColor="#000042" bg="#FFFFFF">
-                            <Text color="grey" ml="10px">What are you looking for</Text>
-
                     <Box p="0.6%" bg="" w="55%" ml="1%">
                         <Box border="1px" h="100%"  w="100%" borderRadius="5px" borderColor="#000042" bg="#FFFFFF">
                             <Text color="grey" ml="2%" mt="0.3%">What are you looking for</Text>
-
                         </Box>
                     </Box>
                     <Box  fontSize="75%" fontFamily="sans-serif" w="28%" ml="5%">
@@ -80,8 +79,16 @@ const TopNav = () => {
                                 Track Order
                             </Text>
                             <Box  display="flex">
-                                <Text cursor="pointer">Sign In &</Text>
-                                <Text cursor="pointer">Sign Up</Text>
+                            <Flex>
+              {isAuth===true?<Center fontWeight={"400"} fontSize="13px" >{Authdata[0].first_name}</Center>:
+              <Box display={"flex"}>
+                <Login/>
+                <Signup/>
+                </Box>
+                }
+                {/* <Link to="/login" fontWeight={"400"} fontSize="13px">Sign In</Link>
+                <Link  fontWeight={"400"} fontSize="13px">Sign Up</Link> */}
+            </Flex>
                             </Box>
                             <Box display="flex" cursor="pointer">
                                 <Image h="75%" src="https://static.lenskart.com/media/desktop/img/wishlist.png" alt="icon"></Image>

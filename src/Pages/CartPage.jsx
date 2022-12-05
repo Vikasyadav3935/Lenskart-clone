@@ -27,7 +27,7 @@ export default function CartPage() {
   const [item, setItem] = useState([]);
 
    function handleDelete(id) {
-    fetch(`http://localhost:3001/Cart/${id}`, {
+    fetch(`https://easy-pink-bull-shoe.cyclic.app/Cart/${id}`, {
         method: "DELETE",
         body: JSON.stringify(item),
         headers: { 'Content-Type': "application/json" }
@@ -40,7 +40,7 @@ export default function CartPage() {
 
   const cartdata = async () => {
     setLoading(true);
-    const res = await fetch('http://localhost:3001/Cart')
+    const res = await fetch('https://easy-pink-bull-shoe.cyclic.app/Cart')
     const data = await res.json();
     // console.log(data)
     setLoading(false);
