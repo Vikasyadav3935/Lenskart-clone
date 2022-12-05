@@ -6,16 +6,16 @@ import Profile from '../Componets/Profile'
 const MyOrders = () => {
   return (
     <div>
-        <Box w={"80%"} m="auto"  display={'flex'}>
-    <Box display={"flex"} flexDir="column" order="1px " width={"250px"}  bg={"#eeefef"}>
-        <Profile info="MY ORDERS" lin="/orders"/>
-        <Profile info="ACCOUNT INFORMATION" lin="account"/>
-        <Profile info="MANAGE NOTIFICATIONS" lin="notification"/>
-        <Profile info="ADDRESS BOOK"/>
-        <Profile info="MY PRESCRIPTIONS"/>
-        <Profile info="SAVED CARDS"/>
-        <Profile info="CHECK VOUCHER BALANCE"/>
-        <Profile info="STORE CREDIT"/>
+        <Box w={"85%"} m="auto"  display={'flex'}>
+    <Box display={"flex"} flexDir="column"   width={"250px"}  bg={"#eeefef"}>
+        <Profile info="MY ORDERS" link="/customer/orders"/>
+        <Profile info="ACCOUNT INFORMATION" link="account"/>
+        <Profile info="MANAGE NOTIFICATIONS" link="notification"/>
+        <Profile info="ADDRESS BOOK" link="address"/>
+        <Profile info="MY PRESCRIPTIONS" link="prescription"/>
+        <Profile info="SAVED CARDS" link="cards"/>
+        <Profile info="CHECK VOUCHER BALANCE" link="voucher" />
+        <Profile info="STORE CREDIT" link="credit"/>
     </Box>
     <Box>
         <Outlet/>

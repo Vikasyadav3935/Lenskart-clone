@@ -1,4 +1,4 @@
-import { Box, HStack, Text, Input, Select, Checkbox } from "@chakra-ui/react";
+import { Box, HStack, Text, Input, Select, Checkbox, Button } from "@chakra-ui/react";
 import React from "react";
 
 const Account = () => {
@@ -39,10 +39,11 @@ const Account = () => {
           <option value="option2">Female</option>
           <option value="option3">Others</option>
         </Select>
-        <Checkbox fontSize={"14px"} mt="10px" size={"sm"}>
+        <Checkbox fontSize={"14px"} mt="10px" size={"sm"} >
           Change Password
         </Checkbox>
       </Box>
+      <Button w="218px" h="45px"  mt="20px" backgroundColor={"#ff9310"} >Save & Continue</Button>
     </Box>
   );
 };
