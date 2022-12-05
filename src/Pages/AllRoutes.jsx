@@ -1,19 +1,18 @@
+
+
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import CartPage from './CartPage'
 import HomePage from './HomePage'
+import TopNav from '../Componets/Navbar/TopNav';
 import Account from '../Componets/Account'
 import MyOrders from './MyOrders'
-import { Box } from '@chakra-ui/react'
-import Orders from '../Componets/Orders'
-import Login from '../Componets/Login'
-import Notification from '../Componets/OrderComponent/Notification'
+
 
 
 const AllRoutes = () => {
   return (
     <Routes>
-        <Route path='/' element={<HomePage/>}/>
         <Route path='/customer' element={<MyOrders/>}>
           <Route path='orders' element={<Orders/>}/>
           <Route path='account' element={<Account/>}/>
@@ -24,6 +23,7 @@ const AllRoutes = () => {
           <Route path='voucher' element={<Box>Check Voucher balance</Box>}/>
           <Route path='credit' element={<Box>Store credit</Box>}/>
         </Route>
+          <Route path='/product/:id' element={<SingleProductPage/>}/>
         <Route path='/cart' element={<CartPage/>}/>
     </Routes>
   )

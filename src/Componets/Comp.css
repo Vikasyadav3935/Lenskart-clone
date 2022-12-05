@@ -37,3 +37,70 @@ gap:10px;
 #parent-grid >div div:last-child{
     margin-top: 17px;;
 }
+
+
+
+
+/* drop down */
+
+.drop-contains{
+
+    background-color: white;
+    background-color: white;
+}
+
+.opt-flex{
+    display: flex;
+    gap: 10px;;
+    font-size: 10px;
+    padding: 10px;
+}
+.opt-flex h5, h6 {
+
+font-weight: bold;
+
+}
+
+.drop-contain{
+
+    display: inline-block;
+  position: relative;
+  
+   
+}
+.drop-opt{
+
+    display: none;
+    position: absolute;
+    overflow: auto;
+    background-color: white;
+  
+
+  
+}
+.drop-contain:hover .drop-opt {
+
+display: block;
+
+
+z-index: 1;
+
+}
+
+
+.drop-contain h5{
+
+    text-align: center;
+}
+.drop-contain >img{
+
+
+width: 200px;
+
+}
+
+#parent-drop{
+    display: flex;
+    justify-content: space-around;
+}
+

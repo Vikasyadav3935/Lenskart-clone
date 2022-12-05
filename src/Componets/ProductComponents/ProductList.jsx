@@ -17,13 +17,18 @@ import axios from "axios";
 import LodingState from "./LodingState";
 
 const ProductList = () => {
+  const dUrl='https://easy-pink-bull-shoe.cyclic.app/Products?_page=1&_limit=9'
   const [products , setProducts]=useState([])
   const [isLoding , setIsLoding]=useState(false)
+  const [filters , setfilters]=useState([])
+  const handleFilter =()=>{
+
+  }
   let loader=[1,2,3,4,5,6]
-  const[ url , setUrl] =useState('https://lenskart-clone.herokuapp.com/Products?_page=1&_limit=9')
+  const[ url , setUrl] =useState(dUrl)
   const addSorttoUrl=(e)=>{
     let order = e.target.value;
-    setUrl(pre=>pre+"_sort=price&_order="+`${order}`)
+    setUrl(dUrl+`&_sort=price&_order=${order}`)
   }
   const fetchproduct=()=>{
     setIsLoding(true)
@@ -36,6 +41,7 @@ const ProductList = () => {
   useEffect(()=>{
     fetchproduct();
   },[url])
+ 
   return (
     <Flex m="0" px="2%">
       <Box w="18%" m={0}>
@@ -61,12 +67,12 @@ const ProductList = () => {
         <Box mb="20px">
           <Text fontWeight="bold" mb="3px" color="blackAlpha.600">FRAME SHAPE</Text>
           <Grid templateColumns="repeat(3, 1fr)">
-            <GridItem><FrameType src="https://static.lenskart.com/images/cust_mailer/Eyeglass/Rectangle.png" type="Rectangle"/></GridItem>
+            <GridItem><FrameType src="https://static.lenskart.com/images/cust_mailer/Eyeglass/Rectangle.png"  type="Rectangle"/></GridItem>
             <GridItem><FrameType src="https://static.lenskart.com/images/cust_mailer/Eyeglass/Round.png" type="Round"/></GridItem>
             <GridItem><FrameType src="https://static.lenskart.com/images/cust_mailer/Eyeglass/CatEye.png" type="Cat Eye"/></GridItem>
             <GridItem><FrameType src="https://static.lenskart.com/images/cust_mailer/Eyeglass/Square.png" type="Square"/></GridItem>
-            <GridItem><FrameType src="https://static.lenskart.com/images/cust_mailer/Eyeglass/Geometric.png" type="Geometric"/></GridItem>
-            <GridItem><FrameType src="https://static.lenskart.com/images/cust_mailer/Eyeglass/Wayfarer.png" type="Wayfarer"/></GridItem>
+            <GridItem><FrameType src="https://static.lenskart.com/images/cust_mailer/Eyeglass/Geometric.png"  type="Geometric"/></GridItem>
+            <GridItem><FrameType src="https://static.lenskart.com/images/cust_mailer/Eyeglass/Wayfarer.png" setfilter={setfilters} fil="wayfarer" type="Wayfarer"/></GridItem>
             <GridItem><FrameType src="https://static.lenskart.com/images/cust_mailer/Eyeglass/Aviator.png" type="Aviator"/></GridItem>
             <GridItem><FrameType src="https://static.lenskart.com/images/cust_mailer/Eyeglass/Hexagonal.png" type="Hexago..."/></GridItem>
             <GridItem><FrameType src="https://static.lenskart.com/images/cust_mailer/Eyeglass/Clubmaster.png" type="Clubmas..."/></GridItem>
@@ -161,7 +167,7 @@ const ProductList = () => {
           border="1px"
           borderColor="gray.400"
         >
-          <Text>ALL COMPUTER GLASSES</Text>
+          <Text>SUNGLASSES</Text>
           <Flex alignItems="center">
             <Text fontWeight="bold" mr="5px" color="green">
               VIEW FRAMES
@@ -184,8 +190,8 @@ const ProductList = () => {
               p="0px"
             >
               <option value="">Select</option>
-              <option value="asc">Price : low to high</option>
-              <option value="desc">Price : high to low</option>
+              <option value="desc">Price : low to high</option>
+              <option value="asc">Price : high to low</option>
             </Select>
           </Flex>
         </Flex>
@@ -197,9 +203,9 @@ const ProductList = () => {
           templateColumns="repeat(3, 1fr)"
           height="100vh"
           gap={6}
-        >
+        > 
           {
-            products.map(ele=><ProductTemplate key={ele.productId} shape={ele.shape} name={ele.name} src={ele.imageTsrc} rating={ele.rating} userRated={ele.userRated} price={ele.price}/>)
+            products.map(ele=><ProductTemplate id={ele.productId} key={ele.productId} product={ele} mprice={ele.mPrice} color={ele.colors} shape={ele.shape} name={ele.name} src={ele.imageTsrc} rating={ele.rating} userRated={ele.userRated} price={ele.price}/>)
           } 
         </Grid>:  
         <Grid
