@@ -11,10 +11,31 @@ import {
 } from "@chakra-ui/react";
 import { TbArrowsUpDown } from "react-icons/tb";
 import ProductTemplate from "./ProductTemplate";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FrameType from "./FrameType";
+import axios from "axios";
+import LodingState from "./LodingState";
 
 const ProductList = () => {
+  const [products , setProducts]=useState([])
+  const [isLoding , setIsLoding]=useState(false)
+  let loader=[1,2,3,4,5,6]
+  const[ url , setUrl] =useState('https://lenskart-clone.herokuapp.com/Products?_page=1&_limit=9')
+  const addSorttoUrl=(e)=>{
+    let order = e.target.value;
+    setUrl(pre=>pre+"_sort=price&_order="+`${order}`)
+  }
+  const fetchproduct=()=>{
+    setIsLoding(true)
+    axios(url)
+    .then(res=>{setProducts(res.data)
+      setIsLoding(false)
+  })
+    .catch(err=>console.log(err))
+  }
+  useEffect(()=>{
+    fetchproduct();
+  },[url])
   return (
     <Flex m="0" px="2%">
       <Box w="18%" m={0}>
@@ -155,56 +176,43 @@ const ProductList = () => {
                 SortBy
               </Text>
             </Flex>
-            <Select
+            <Select onChange={addSorttoUrl}
               border="2px"
               borderRadius="3px"
               borderColor="black"
               ml="4px"
               p="0px"
             >
-              <option>Select</option>
-              <option>Price : low to high</option>
-              <option>Price : high to low</option>
+              <option value="">Select</option>
+              <option value="asc">Price : low to high</option>
+              <option value="desc">Price : high to low</option>
             </Select>
           </Flex>
         </Flex>
         <Text mt="5px" textAlign="center">
-          Showing 6 of 1134 Results
+          Showing {products.length} of 36 Results
         </Text>
+        {!isLoding?<Grid
+          m="20px 10px"
+          templateColumns="repeat(3, 1fr)"
+          height="100vh"
+          gap={6}
+        >
+          {
+            products.map(ele=><ProductTemplate key={ele.productId} shape={ele.shape} name={ele.name} src={ele.imageTsrc} rating={ele.rating} userRated={ele.userRated} price={ele.price}/>)
+          } 
+        </Grid>:  
         <Grid
           m="20px 10px"
           templateColumns="repeat(3, 1fr)"
           height="100vh"
           gap={6}
         >
-          <GridItem>
-            <ProductTemplate />
-          </GridItem>
-          <GridItem>
-            <ProductTemplate />
-          </GridItem>
-          <GridItem>
-            <ProductTemplate />
-          </GridItem>
-          <GridItem>
-            <ProductTemplate />
-          </GridItem>
-          <GridItem>
-            <ProductTemplate />
-          </GridItem>
-          <GridItem>
-            <ProductTemplate />
-          </GridItem>
-          <GridItem>
-            <ProductTemplate />
-          </GridItem>
-          <GridItem>
-            <ProductTemplate />
-          </GridItem>
-          <GridItem>
-            <ProductTemplate />
-          </GridItem>
+          {
+            loader.map(ele=><LodingState key={ele}/>)
+          }
         </Grid>
+          }
       </Box>
     </Flex>
   );
