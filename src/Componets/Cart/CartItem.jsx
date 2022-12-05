@@ -1,46 +1,34 @@
 import React from "react";
-import { Box, Divider, Flex, Image, Text, Spacer } from "@chakra-ui/react";
+import { Box, Divider, Flex, Image, Text, Spacer,Button,useToast } from "@chakra-ui/react";
 
 
 
 export default function CartItem(props){
-
-    // const arr = [
-    //     {
-    //       image: 'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/628x301/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e14246-c1-eyeglasses_vincent-chase-vc-e14246-c1-eyeglasses_G_5134.jpg',
-    //       title: 'brown transparent brown gold full rim square vincent chase blend edit vc e14246-c1 eyeglasses',
-    //       op: 2000,
-    //       actual: 1199
-    //     },
-    //     {
-    //       image: 'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/628x301/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e14246-c1-eyeglasses_vincent-chase-vc-e14246-c1-eyeglasses_G_5134.jpg',
-    //       title: 'brown transparent brown gold full rim square vincent chase blend edit vc e14246-c1 eyeglasses',
-    //       op: 2000,
-    //       actual: 1199
-    //     },
-    //     {
-    //       image: 'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/628x301/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e14246-c1-eyeglasses_vincent-chase-vc-e14246-c1-eyeglasses_G_5134.jpg',
-    //       title: 'brown transparent brown gold full rim square vincent chase blend edit vc e14246-c1 eyeglasses',
-    //       op: 2000,
-    //       actual: 1199
-    //     },
-    //     {
-    //       image: 'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/628x301/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e14246-c1-eyeglasses_vincent-chase-vc-e14246-c1-eyeglasses_G_5134.jpg',
-    //       title: 'brown transparent brown gold full rim square vincent chase blend edit vc e14246-c1 eyeglasses',
-    //       op: 2000,
-    //       actual: 1199
-    //     }
-    //   ]
-    //   const [item, setItem] = useState([]);
-    
-    //   useEffect(() => {
-    //     setItem(arr);
-    //   }, [])
-    
+  
+  const toast = useToast()
+  const position ='top left'
+  function alert(){
+    toast({
+      title: `Item Removed From Cart!`,
+      position: position,
+      isClosable: true,
+      status: 'error',
+    })
+  }
+//   async function handleDelete(id) {
+//     let g= await fetch(`https://easy-pink-bull-shoe.cyclic.app/Cart/${id}`, {
+//         method: "DELETE",
+//         body: JSON.stringify(props.item),
+//         headers: { 'Content-Type': "application/json" }
+//     })
+//     await g.json()
+//     props.refresh()
+// }
       console.log(props.item)
     return(
         <>
         {props.item.map((el, index) => {
+          console.log(props.item)
             return (
 
 
@@ -48,7 +36,7 @@ export default function CartItem(props){
                 {/* item-product-card-image */}
                 <Box w="30%">
                   <a href="/" rel="noopener noreferrer">
-                    <Image w='236px' src={el.image} />
+                    <Image w='236px' src={el.imageTsrc} />
                   </a>
                 </Box>
 
@@ -60,10 +48,11 @@ export default function CartItem(props){
                       <a href="/" rel="noopener noreferrer">
                         <Box>
                           <Text fontWeight='700' 
-                          // fontFamily='lenskartsans-bold' 
-                          fontFamily='sans-serif-bold' 
+                          
                           fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
-                            {el.title}
+                            {/* static data */}
+                            {/* {el.title} */}
+                            {el.colors+' Block Phone & Computer Glasses: Classic chase '+ el.colors +' Transparent '+el.style+' '+ el.shape + ' Lenskart Blu LB '+el.productId}
                           </Text>
                         </Box>
                       </a>
@@ -71,16 +60,11 @@ export default function CartItem(props){
 
                     <Box w="40%">
                       <Text display="flex" gap={6}>
-                        <Text color='#9999b3' fontWeight='400' 
-                        // fontFamily='lenskartsans-bold' 
-                        fontFamily='sans-serif-bold'
-                        >
-                          <s>{'₹' + el.op}</s>
+                        <Text color='#9999b3' fontWeight='500'>
+                          <s>{'₹' + el.mPrice}</s>
                         </Text>
                         <Text color='#000042' fontWeight='700' 
-                        // fontFamily='lenskartsans-bold' 
-                        fontFamily='sans-serif-bold'
-                        >{'₹' + el.actual}</Text>
+                        >{'₹' + el.price}</Text>
                       </Text>
                     </Box>
                   </Box>
@@ -91,16 +75,20 @@ export default function CartItem(props){
 
                     <Text
                       mr='16px' textDecoration='underline' fontWeight='700' 
-                      // fontFamily='lenskartsans-bold' 
-                      fontFamily='sans-serif-bold' 
                       
-                      fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
+                      
+                      fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'
+                      onClick={()=>{
+                        alert()
+                        props.refresh(el.id)
+
+                      }}
+                      >
                       Remove
                     </Text>
                     <Text
                       ml='16px' textDecoration='underline' fontWeight='700'
-                      //  fontFamily='lenskartsans-bold' 
-                      fontFamily='sans-serif-bold' 
+                      
                        fontStyle='normal' lineHeight='24px' letterSpacing='-.02em' textTransform='capitalize' color='#000042'>
                       Duplicate
                     </Text>
