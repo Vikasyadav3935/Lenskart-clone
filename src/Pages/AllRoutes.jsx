@@ -7,6 +7,8 @@ import ProductList from '../Componets/ProductComponents/ProductList'
 
 import SingleProductPage from './SingleProductPage'
 import CartPage from './CartPage'
+import Login from '../Componets/Login'
+import { Privateroutes } from '../ContextApi/Privateroute'
 const AllRoutes = () => {
   return (
     <Routes>
@@ -14,7 +16,16 @@ const AllRoutes = () => {
        <Route path="/" element={<Home/>}/>
        <Route path='/product' element={<ProductList/>}/>
        <Route path='/product/:id' element={<SingleProductPage/>}/>
-       <Route path='/cart' element={<CartPage/>}/>
+       <Route path='/cart' element={
+       <Privateroutes>
+
+
+<CartPage/>
+       </Privateroutes>
+       
+       }/>
+
+       <Route path='/Login' element={<Login/>}/>
     </Routes>
   )
 }
