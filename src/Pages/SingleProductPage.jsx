@@ -2,12 +2,13 @@ import { Box, Button, Grid, GridItem, Image, Select, Text} from '@chakra-ui/reac
 import {AiOutlineHeart} from 'react-icons/ai'
 import React, { useEffect } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
+import TopNav from '../Componets/Navbar/TopNav'
 
 const SingleProductPage = () => {
   const [data, setData] = useState({})
-  
+  const navigate = useNavigate()
   
   const {id} = useParams()
   const addToCart=()=>{
@@ -19,8 +20,8 @@ const SingleProductPage = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
-    }).then(res=>res.json)
-    .catch(err=>console.log(err))
+    }).then(res=>navigate("/cart"))
+    .catch(err=>navigate("/cart"))
   }
   const fetchSingleProduct=()=>{
     axios(`https://easy-pink-bull-shoe.cyclic.app/Products?productId=${id}`).then(res=>setData(res.data[0]))
@@ -32,6 +33,8 @@ const SingleProductPage = () => {
     
   }, [])
   return (
+    <>
+   <TopNav/>
     <Grid m={5} gap={5} justifyContent="space-around" templateColumns='repeat(3, 1fr)'>
         <GridItem borderRadius={10} p="80px 5px" border="1px solid"  borderColor="gray.300"><Image  src={data.imageTsrc}/></GridItem>
         <GridItem borderRadius={10} p="80px 5px" border="1px solid"  borderColor="gray.300" ><Image src={data.imageTsrc}/></GridItem>
@@ -102,6 +105,7 @@ const SingleProductPage = () => {
         <GridItem borderRadius={10} p="80px 5px" border="1px solid"  borderColor="gray.300" ><Image src='https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//l/e/lenskart-blu-lb-e14058-c3-eyeglasses_G_7090.jpg'/></GridItem>
         <GridItem borderRadius={10} p="80px 5px" border="1px solid"  borderColor="gray.300" ><Image src='https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//l/e/lenskart-blu-lb-e14058-c3-eyeglasses_G_7091.jpg'/></GridItem>
     </Grid>
+    </>
   )
 }
 

@@ -128,7 +128,7 @@ const Login = (props) => {
 
   return (
     <div>
-      <Center onClick={onOpen} fontWeight={"400"} fontSize="13px" mt="15px">Sign In &</Center>
+      <Center onClick={onOpen} fontWeight={"400"} fontSize="13px">Sign In &</Center>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />

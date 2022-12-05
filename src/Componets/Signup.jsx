@@ -156,7 +156,7 @@ const Signup = () => {
  
   return (
     <div>
-      <Center onClick={onOpen} fontWeight={"400"} fontSize="13px" mt="15px">Sign Up</Center>
+      <Center onClick={onOpen} fontWeight={"400"} fontSize="13px" >Sign Up</Center>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
